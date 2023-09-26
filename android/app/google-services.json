@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "566392575839",
+    "project_id": "hands-on-todo-list-provider",
+    "storage_bucket": "hands-on-todo-list-provider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566392575839:android:37e0197c7299cb99bd08ea",
+        "android_client_info": {
+          "package_name": "br.com.academiadoflutter.flutter_hands_on_todo_list_provider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566392575839-05ogtk4m309jrasvv5requ53g56asntv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.academiadoflutter.flutter_hands_on_todo_list_provider",
+            "certificate_hash": "d61bd03ba89957ffe18c614cb4443e0b4973a2e4"
+          }
+        },
+        {
+          "client_id": "566392575839-8sac1mgstp4adcouuglv0s0risad2tmd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv7usZjBX9fNy8tKnlyPlV9onbr_ObDAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566392575839-8sac1mgstp4adcouuglv0s0risad2tmd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

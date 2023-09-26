@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "566392575839",
+    "project_id": "hands-on-todo-list-provider",
+    "storage_bucket": "hands-on-todo-list-provider.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566392575839:android:37e0197c7299cb99bd08ea",
+        "android_client_info": {
+          "package_name": "br.com.academiadoflutter.flutter_hands_on_todo_list_provider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv7usZjBX9fNy8tKnlyPlV9onbr_ObDAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
