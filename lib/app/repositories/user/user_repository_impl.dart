@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/exception/auth_exception.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import './user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final FirebaseAuth _firebaseAuth;
-
-  //UserRepositoryImpl({required firebaseAuth}) : _firebaseAuth = firebaseAuth;
 
   UserRepositoryImpl({required FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth;
@@ -62,30 +61,11 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
-  // @override
-  // Future<void> forgotPassword(String email) async {
-  //   try {
-  //     final loginMetods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
-  //     if (loginMetods.contains('password')) {
-  //       await _firebaseAuth.sendPasswordResetEmail(email: email);
-  //     } else if (loginMetods.contains('google')) {
-  //       throw AuthException(
-  //           message:
-  //               'Cadastro realizado com o Google, não é possivel resetar senha');
-  //     } else {
-  //       throw AuthException(message: 'Email não cadastradooooo');
-  //     }
-  //   } on PlatformException catch (e, s) {
-  //     print(e);
-  //     print(s);
-  //     throw AuthException(message: 'Erro ao resetar senha');
-  //   }
-  // }
-
   @override
   Future<void> forgotPassword(String email) async {
     try {
-      final loginMethods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+      final loginMethods =
+          await _firebaseAuth.fetchSignInMethodsForEmail(email);
 
       if (loginMethods.contains('password')) {
         await _firebaseAuth.sendPasswordResetEmail(email: email);
@@ -100,6 +80,36 @@ class UserRepositoryImpl implements UserRepository {
       print(e);
       print(s);
       throw AuthException(message: "Erro ao resetar senha");
+    }
+  }
+
+  @override
+  Future<User?> googleLogin() async {
+    try {
+      final googleSignIn = GoogleSignIn();
+      final googleUser = await googleSignIn.signIn();
+      if (googleUser != null) {
+        final loginMethods =
+            await _firebaseAuth.fetchSignInMethodsForEmail(googleUser.email);
+        if (loginMethods.contains('password')) {
+          throw AuthException(
+              message:
+                  'Vode utilizou o email para cadastro no TodoList, caso esqueceu sua senha por favor click no link -Esquei a senha-');
+        } else {
+          final googleAuth = await googleUser.authentication;
+          final firebaseCredential = GoogleAuthProvider.credential(
+              accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+          var userCredential =
+              await _firebaseAuth.signInWithCredential(firebaseCredential);
+          return userCredential.user;
+        }
+      }
+    } on FirebaseAuthException catch (e,s) {
+      print(e);
+      print(s);
+      if (e.code == 'account-exists-with-different-credential') {
+        
+      }
     }
   }
 }

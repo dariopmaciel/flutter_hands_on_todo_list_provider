@@ -6,5 +6,7 @@ abstract interface class UserRepository {
   Future<User?> login(String email, String password);
   
   Future<void> forgotPassword(String email);  
+
+  Future<User?> googleLogin();
   
 }
