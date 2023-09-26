@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/exception/auth_exception.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/repositories/user/user_repository.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
-import './user_repository.dart';
 
 class UserRepositoryImpl implements UserRepository {
   final FirebaseAuth _firebaseAuth;
@@ -62,6 +61,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
+  // Rodrigo Rahman
   Future<void> forgotPassword(String email) async {
     try {
       final loginMethods =
@@ -83,13 +83,62 @@ class UserRepositoryImpl implements UserRepository {
     }
   }
 
+//José Algusto Soares
+  // Future<void> forgotPassword(String email) async {
+  //   try {
+  //     final loginMethods =
+  //         await _firebaseAuth.fetchSignInMethodsForEmail(email);
+  //     print('loginMethods: $loginMethods');
+
+  //     if (loginMethods.isEmpty) {
+  //       try {
+  //         await _firebaseAuth.sendPasswordResetEmail(email: email);
+  //       } catch (e) {
+  //         print('e: $e');
+  //         throw AuthException(message: "E-mail nao cadastrado");
+  //       }
+  //     } else {
+  //       throw AuthException(
+  //           message:
+  //               "Cadastro realizado com o google, não pode ser resetado a senha");
+  //     }
+  //   } on PlatformException catch (e, s) {
+  //     print('e: $e');
+  //     print('s: $s');
+  //     throw AuthException(message: "Erro ao resetar senha");
+  //   }
+  // }
+
+//Marcuss Brasizza
+  // Future<void> forgotPassword(String email) async {
+  //   try {
+  //     final loginMethods =
+  //         await _firebaseAuth.fetchSignInMethodsForEmail(email);
+
+  //     if (loginMethods.isEmpty || loginMethods.contains('password')) {
+  //       await _firebaseAuth.sendPasswordResetEmail(email: email);
+  //     } else if (loginMethods.contains('google')) {
+  //       throw AuthException(
+  //           message:
+  //               "Cadastro realizado com o Goolge, não pode ser resetado a senha");
+  //     } else {
+  //       throw AuthException(message: "E-mail não cadastrado");
+  //     }
+  //   } on PlatformException catch (e, s) {
+  //     print(e);
+  //     print(s);
+  //     throw AuthException(message: "Erro ao resetar senha");
+  //   }
+  // }
+
   @override
   Future<User?> googleLogin() async {
+    List<String>? loginMethods;
     try {
       final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
-        final loginMethods =
+        loginMethods =
             await _firebaseAuth.fetchSignInMethodsForEmail(googleUser.email);
         if (loginMethods.contains('password')) {
           throw AuthException(
@@ -104,11 +153,16 @@ class UserRepositoryImpl implements UserRepository {
           return userCredential.user;
         }
       }
-    } on FirebaseAuthException catch (e,s) {
+    } on FirebaseAuthException catch (e, s) {
       print(e);
       print(s);
       if (e.code == 'account-exists-with-different-credential') {
-        
+        throw AuthException(message: '''
+              Login inválido, você se registrou no TodoList com os seguintes provedores:
+              ${loginMethods?.join(',')}
+        ''');
+      } else {
+        throw AuthException(message: "Erro ao realizar login");
       }
     }
   }
