@@ -30,7 +30,7 @@ class LoginController extends DefaultChangeNotifier {
     }
   }
 
-  Future<void> forgotPassword(String email) async {
+ Future<void> forgotPassword(String email) async {
     try {
       showLoadingAndResetState();
       infoMessage = null;

@@ -62,26 +62,27 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   // Rodrigo Rahman
-  Future<void> forgotPassword(String email) async {
-    try {
-      final loginMethods =
-          await _firebaseAuth.fetchSignInMethodsForEmail(email);
+  // Future<void> forgotPassword(String email) async {
+  //   try {
+  //     final loginMethods =
+  //         // await _firebaseAuth.fetchSignInMethodsForEmail(email);
+  //         await _firebaseAuth.fetchSignInMethodsForEmail(email);
 
-      if (loginMethods.contains('password')) {
-        await _firebaseAuth.sendPasswordResetEmail(email: email);
-      } else if (loginMethods.contains('google')) {
-        throw AuthException(
-            message:
-                "Cadastro realizado com o Goolge, não pode ser resetado a senha");
-      } else {
-        throw AuthException(message: "E-mail não cadastrado");
-      }
-    } on PlatformException catch (e, s) {
-      print(e);
-      print(s);
-      throw AuthException(message: "Erro ao resetar senha");
-    }
-  }
+  //     if (loginMethods.contains('email')) {
+  //       await _firebaseAuth.sendPasswordResetEmail(email: email);
+  //     } else if (loginMethods.contains('google')) {
+  //       throw AuthException(
+  //           message:
+  //               "Cadastro realizado com o Goolge, não pode ser resetado a senha");
+  //     } else {
+  //       throw AuthException(message: "E-mail não cadastrado");
+  //     }
+  //   } on PlatformException catch (e, s) {
+  //     print(e);
+  //     print(s);
+  //     throw AuthException(message: "Erro ao resetar senha");
+  //   }
+  // }
 
 //José Algusto Soares
   // Future<void> forgotPassword(String email) async {
@@ -109,27 +110,27 @@ class UserRepositoryImpl implements UserRepository {
   //   }
   // }
 
-//Marcuss Brasizza
-  // Future<void> forgotPassword(String email) async {
-  //   try {
-  //     final loginMethods =
-  //         await _firebaseAuth.fetchSignInMethodsForEmail(email);
+// Marcuss Brasizza
+  Future<void> forgotPassword(String email) async {
+    try {
+      final loginMethods =
+          await _firebaseAuth.fetchSignInMethodsForEmail(email);
 
-  //     if (loginMethods.isEmpty || loginMethods.contains('password')) {
-  //       await _firebaseAuth.sendPasswordResetEmail(email: email);
-  //     } else if (loginMethods.contains('google')) {
-  //       throw AuthException(
-  //           message:
-  //               "Cadastro realizado com o Goolge, não pode ser resetado a senha");
-  //     } else {
-  //       throw AuthException(message: "E-mail não cadastrado");
-  //     }
-  //   } on PlatformException catch (e, s) {
-  //     print(e);
-  //     print(s);
-  //     throw AuthException(message: "Erro ao resetar senha");
-  //   }
-  // }
+      if (loginMethods.isEmpty || loginMethods.contains('password')) {
+        await _firebaseAuth.sendPasswordResetEmail(email: email);
+      } else if (loginMethods.contains('google')) {
+        throw AuthException(
+            message:
+                "Cadastro realizado com o Goolge, não pode ser resetado a senha");
+      } else {
+        throw AuthException(message: "E-mail não cadastrado");
+      }
+    } on PlatformException catch (e, s) {
+      print(e);
+      print(s);
+      throw AuthException(message: "Erro ao resetar senha");
+    }
+  }
 
   @override
   Future<User?> googleLogin() async {
@@ -146,10 +147,10 @@ class UserRepositoryImpl implements UserRepository {
                   'Vode utilizou o email para cadastro no TodoList, caso esqueceu sua senha por favor click no link -Esquei a senha-');
         } else {
           final googleAuth = await googleUser.authentication;
-          final firebaseCredential = GoogleAuthProvider.credential(
+          final credential = GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
           var userCredential =
-              await _firebaseAuth.signInWithCredential(firebaseCredential);
+              await _firebaseAuth.signInWithCredential(credential);
           return userCredential.user;
         }
       }
