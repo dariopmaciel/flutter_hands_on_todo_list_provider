@@ -159,7 +159,9 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius: BorderRadius.circular(30),
                               borderSide: BorderSide.none,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              //Login com o google
+                            },
                           ),
                           const SizedBox(height: 20),
                           Row(

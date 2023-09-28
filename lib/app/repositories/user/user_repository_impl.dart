@@ -144,17 +144,17 @@ class UserRepositoryImpl implements UserRepository {
         if (loginMethods.contains('password')) {
           throw AuthException(
               message:
-                  'Vode utilizou o email para cadastro no TodoList, caso esqueceu sua senha por favor click no link -Esquei a senha-');
+                  'Vode utilizou o email para cadastro no TodoList, caso esqueceu sua senha por favor click no link ->Esqueceu a senha?');
         } else {
           final googleAuth = await googleUser.authentication;
-          final credential = GoogleAuthProvider.credential(
+          final firebaseCredential = GoogleAuthProvider.credential(
               accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
           var userCredential =
-              await _firebaseAuth.signInWithCredential(credential);
+              await _firebaseAuth.signInWithCredential(firebaseCredential);
           return userCredential.user;
         }
       }
-    } on FirebaseAuthException catch (e, s) {
+    } on FirebaseAuthException catch (e,s) {
       print(e);
       print(s);
       if (e.code == 'account-exists-with-different-credential') {
@@ -166,5 +166,6 @@ class UserRepositoryImpl implements UserRepository {
         throw AuthException(message: "Erro ao realizar login");
       }
     }
+    // return null;
   }
 }
