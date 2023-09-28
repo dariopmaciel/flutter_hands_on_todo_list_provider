@@ -115,7 +115,6 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final loginMethods =
           await _firebaseAuth.fetchSignInMethodsForEmail(email);
-
       if (loginMethods.isEmpty || loginMethods.contains('password')) {
         await _firebaseAuth.sendPasswordResetEmail(email: email);
       } else if (loginMethods.contains('google')) {
@@ -154,7 +153,7 @@ class UserRepositoryImpl implements UserRepository {
           return userCredential.user;
         }
       }
-    } on FirebaseAuthException catch (e,s) {
+    } on FirebaseAuthException catch (e, s) {
       print(e);
       print(s);
       if (e.code == 'account-exists-with-different-credential') {
@@ -167,5 +166,11 @@ class UserRepositoryImpl implements UserRepository {
       }
     }
     // return null;
+  }
+
+  @override
+  Future<void> googleLogout() async {
+    await GoogleSignIn().signOut();
+    _firebaseAuth.signOut();
   }
 }

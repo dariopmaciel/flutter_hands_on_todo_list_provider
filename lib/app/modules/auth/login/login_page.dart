@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(height: 30),
                           SignInButton(
                             Buttons.google,
-                            text: "Login com Google",
+                            text: "Continue com o Google",
                             padding: const EdgeInsets.all(5),
                             shape: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(30),
@@ -161,6 +161,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             onPressed: () {
                               //Login com o google
+                              context.read<LoginController>().googleLogin();
                             },
                           ),
                           const SizedBox(height: 20),

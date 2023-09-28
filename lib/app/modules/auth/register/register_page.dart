@@ -1,12 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_hands_on_todo_list_provider/app/core/ui/theme_extensions.dart';
-// import 'package:flutter_hands_on_todo_list_provider/app/core/validators/validators.dart';
-// import 'package:flutter_hands_on_todo_list_provider/app/core/widget/todo_list_field.dart';
-// import 'package:flutter_hands_on_todo_list_provider/app/core/widget/todo_list_logo.dart';
-// import 'package:flutter_hands_on_todo_list_provider/app/modules/auth/register/register_controller.dart';
-// import 'package:provider/provider.dart';
-// import 'package:validatorless/validatorless.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/notifier/default_listener_notifier.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/ui/theme_extensions.dart';
