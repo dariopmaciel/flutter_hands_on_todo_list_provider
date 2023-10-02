@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/database/sqlite_adm_connection.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/core/navigator/todo_list_navigator.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/ui/todo_list_ui_config.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/modules/home/home_module.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/splash/splash_page.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/auth/auth_module.dart';
 
@@ -34,7 +36,11 @@ class _AppWidgetState extends State<AppWidget> {
       // initialRoute: '/login',
       //Para evitar a verbose, construiu-se rotas para os varios modulos,'{...AuthModule().routers},'
       theme: TodoListUiConfig.theme,
-      routes: {...AuthModule().routers},
+      navigatorKey: TodoListNavigator.navigatorKey,
+      routes: {
+        ...AuthModule().routers,
+        ...HomeModule().routers,
+      },
       // routes: {
       //   '/login': (_) => MultiProvider(
       //         providers: [
