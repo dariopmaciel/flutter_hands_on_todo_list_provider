@@ -12,14 +12,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Home Page')),
       drawer: HomeDrawer(),
       body: Container(),
-      // Center(
-      //   child: TextButton(
-      //     onPressed: () {
-      //       context.read<AuthProvider>().logout();
-      //     },
-      //     child: const Text('LogOut'),
-      //   ),
-      // ),
+      
     );
   }
 }

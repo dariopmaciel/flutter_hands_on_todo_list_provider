@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/auth/auth_provider.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/ui/messages.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/core/ui/theme_extensions.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/services/user/user_service.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:provider/provider.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -70,10 +72,18 @@ class HomeDrawer extends StatelessWidget {
                             style: TextStyle(color: Colors.red),
                           )),
                       TextButton(
-                          onPressed: () {
-                            if (nameVN.value.isEmpty) {
+                          onPressed: () async {
+                            final nameValue = nameVN.value;
+                            if (nameValue.isEmpty) {
                               Messages.of(context)
                                   .showError('Nome Obrigatório');
+                            } else {
+                              // Loader.show(context);
+                              await context
+                                  .read<UserService>()
+                                  .updateDisplayName(nameValue);
+                              // Loader.hide();
+                              Navigator.of(context).pop();
                             }
                           },
                           child: const Text('Alterar')),
