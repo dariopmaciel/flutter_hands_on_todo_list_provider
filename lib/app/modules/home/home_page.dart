@@ -4,6 +4,7 @@ import 'package:flutter_hands_on_todo_list_provider/app/core/ui/todo_list_icons.
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_drawer.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_filters.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_header.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_week_filter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -43,6 +44,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       HomeHeader(),
                       HomeFilters(),
+                      HomeWeekFilter(),
                       // FloatingActionButton(
                       //     onPressed: () {}, child: Icon(Icons.add))
                     ],
