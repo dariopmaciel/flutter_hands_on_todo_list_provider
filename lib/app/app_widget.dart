@@ -32,6 +32,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'ToDo List Provider',
       // initialRoute: '/login',
       //Para evitar a verbose, construiu-se rotas para os varios modulos,'{...AuthModule().routers},'
