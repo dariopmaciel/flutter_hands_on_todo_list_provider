@@ -4,10 +4,25 @@ import 'package:flutter_hands_on_todo_list_provider/app/core/ui/todo_list_icons.
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_drawer.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_filters.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_header.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_tasks.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_week_filter.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/task_create_page.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
+  void _goToCreateTask(BuildContext context) {
+    // Navigator.of(context).pushNamed('/task/create');
+
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => TaskCreatePage(
+          controller: context.read(),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +30,23 @@ class HomePage extends StatelessWidget {
       // appBar: AppBar(title: const Text('Home Page')),
       appBar: AppBar(
         iconTheme: IconThemeData(color: context.primaryColor),
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0XFFFAFBFE),
         elevation: 0,
         actions: [
           PopupMenuButton(
             icon: const Icon(TodoListIcons.filter),
             itemBuilder: (_) => [
               const PopupMenuItem<bool>(
-                  child: Text("Mostrar Tarefas Concluidas"))
+                child: Text("Mostrar Tarefas Concluidas"),
+              ),
             ],
           )
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: context.primaryColor,
+        onPressed: () => _goToCreateTask(context),
+        child: const Icon(Icons.add),
       ),
       drawer: HomeDrawer(),
       backgroundColor: const Color(0XFFFAFBFE),
@@ -45,8 +66,7 @@ class HomePage extends StatelessWidget {
                       HomeHeader(),
                       HomeFilters(),
                       HomeWeekFilter(),
-                      // FloatingActionButton(
-                      //     onPressed: () {}, child: Icon(Icons.add))
+                      HomeTasks(),
                     ],
                   ),
                 ),

@@ -15,12 +15,12 @@ class _HomeWeekFilterState extends State<HomeWeekFilter> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 10),
+        const SizedBox(height: 5),
         Text(
           "DIA DA SEMANA",
           style: context.titleStyle.copyWith(fontSize: 16),
         ),
-        const SizedBox(height: 10),
+        // const SizedBox(height: 10),
         SizedBox(
           height: 95,
           child: DatePicker(
