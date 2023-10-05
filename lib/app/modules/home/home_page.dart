@@ -7,6 +7,7 @@ import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/hom
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_tasks.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_week_filter.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/task_create_page.dart';
+import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/tasks_module.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,14 +15,22 @@ class HomePage extends StatelessWidget {
 
   void _goToCreateTask(BuildContext context) {
     // Navigator.of(context).pushNamed('/task/create');
+    //
+    Navigator.of(context).push(PageRouteBuilder(
+      transitionDuration: Duration(milliseconds: 400),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        animation = CurvedAnimation(parent: animation, curve: Curves.easeInQuad);
+        return ScaleTransition(scale: animation, alignment: Alignment.bottomRight, child: child,);
+      },
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return TasksModule().getPage('/task/create', context);
+      },
+    )
+        //ou assim
+        // MaterialPageRoute(
+        //     builder: (_) => TasksModule().getPage('/task/create', context)),
 
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => TaskCreatePage(
-          controller: context.read(),
-        ),
-      ),
-    );
+        );
   }
 
   @override

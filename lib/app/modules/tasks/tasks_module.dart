@@ -4,8 +4,8 @@ import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/task_creat
 
 import 'package:provider/provider.dart';
 
-class TaskModule extends TodoListModule {
-  TaskModule()
+class TasksModule extends TodoListModule {
+  TasksModule()
       : super(
           bindings: [
             ChangeNotifierProvider(
