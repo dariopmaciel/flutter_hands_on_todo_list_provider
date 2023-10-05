@@ -6,9 +6,9 @@ import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/hom
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_header.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_tasks.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/home/widgets/home_week_filter.dart';
-import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/task_create_page.dart';
+
 import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/tasks_module.dart';
-import 'package:provider/provider.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
