@@ -4,9 +4,11 @@ import 'package:flutter_hands_on_todo_list_provider/app/core/widget/todo_list_fi
 
 import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/task_create_controler.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/widget/calendar_button.dart';
+import 'package:validatorless/validatorless.dart';
 
 class TaskCreatePage extends StatelessWidget {
-  TaskCreateControler _controller;
+  final TaskCreateControler _controller;
+  final descriptionEC = TextEditingController();
 
   TaskCreatePage({Key? key, required TaskCreateControler controller})
       : _controller = controller,
@@ -38,7 +40,6 @@ class TaskCreatePage extends StatelessWidget {
         label: const Text(
           'Salvar Task',
           style: TextStyle(
-            
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -61,7 +62,11 @@ class TaskCreatePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 30),
-              TodoListField(label: ''),
+              TodoListField(
+                label: '',
+                controller: descriptionEC,
+                validator: Validatorless.required("* Obrigatorio!"),
+              ),
               const SizedBox(height: 20),
               CalendarButton(),
             ],
