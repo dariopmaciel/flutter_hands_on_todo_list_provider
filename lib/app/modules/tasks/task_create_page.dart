@@ -11,8 +11,10 @@ class TaskCreatePage extends StatelessWidget {
   final _descriptionEC = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  TaskCreatePage({Key? key, required TaskCreateControler controller})
-      : _controller = controller,
+  TaskCreatePage({
+    Key? key,
+    required TaskCreateControler controller,
+  })  : _controller = controller,
         super(key: key);
 
   @override
@@ -38,9 +40,9 @@ class TaskCreatePage extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: context.primaryColor,
         onPressed: () {
-          final formvalid = _formKey.currentState?.validate() ??false;
-          if (formvalid) {
-            _controller.save(_descriptionEC.text);            
+          final formValid = _formKey.currentState?.validate() ?? false;
+          if (formValid) {
+            _controller.save(_descriptionEC.text);
           }
         },
         label: const Text(
@@ -82,7 +84,4 @@ class TaskCreatePage extends StatelessWidget {
       ),
     );
   }
-
-@override
-List<Object?> get props => [_controller, _descriptionEC, _formKey];
 }
