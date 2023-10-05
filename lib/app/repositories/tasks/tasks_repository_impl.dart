@@ -11,12 +11,12 @@ class TasksRepositoryImpl implements TasksRepository {
 
   @override
   Future<void> save(DateTime date, String description) async {
-    var comn = await _sqliteConnectionFactory.openConnection();
-    await comn.insert("todo", {
+    var conn = await _sqliteConnectionFactory.openConnection();
+    await conn.insert('todo', {
       'id': null,
       'descricao': description,
       'data_hora': date.toIso8601String(),
-      'finalizado': 0, // ZERO significa falso
+      'finalizado': 0 // ZERO significa falso
     });
   }
 }
