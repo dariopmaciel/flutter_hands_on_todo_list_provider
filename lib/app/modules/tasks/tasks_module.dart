@@ -5,7 +5,6 @@ import 'package:flutter_hands_on_todo_list_provider/app/repositories/tasks/tasks
 import 'package:flutter_hands_on_todo_list_provider/app/repositories/tasks/tasks_repository_impl.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/services/tasks/tasks_service.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/services/tasks/tasks_service_impl.dart';
-import 'package:path/path.dart';
 
 import 'package:provider/provider.dart';
 

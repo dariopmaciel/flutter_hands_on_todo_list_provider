@@ -8,7 +8,8 @@ import 'package:validatorless/validatorless.dart';
 
 class TaskCreatePage extends StatelessWidget {
   final TaskCreateControler _controller;
-  final descriptionEC = TextEditingController();
+  final _descriptionEC = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   TaskCreatePage({Key? key, required TaskCreateControler controller})
       : _controller = controller,
@@ -36,7 +37,12 @@ class TaskCreatePage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: context.primaryColor,
-        onPressed: () {},
+        onPressed: () {
+          final formvalid = _formKey.currentState?.validate() ??false;
+          if (formvalid) {
+            _controller.save(_descriptionEC.text);            
+          }
+        },
         label: const Text(
           'Salvar Task',
           style: TextStyle(
@@ -46,8 +52,9 @@ class TaskCreatePage extends StatelessWidget {
         ),
       ),
       body: Form(
+        key: _formKey,
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 30),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,7 +71,7 @@ class TaskCreatePage extends StatelessWidget {
               const SizedBox(height: 30),
               TodoListField(
                 label: '',
-                controller: descriptionEC,
+                controller: _descriptionEC,
                 validator: Validatorless.required("* Obrigatorio!"),
               ),
               const SizedBox(height: 20),
@@ -75,4 +82,7 @@ class TaskCreatePage extends StatelessWidget {
       ),
     );
   }
+
+@override
+List<Object?> get props => [_controller, _descriptionEC, _formKey];
 }

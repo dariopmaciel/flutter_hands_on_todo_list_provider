@@ -6,9 +6,7 @@ import 'package:flutter_hands_on_todo_list_provider/app/modules/home/home_module
 import 'package:flutter_hands_on_todo_list_provider/app/modules/splash/splash_page.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/auth/auth_module.dart';
 import 'package:flutter_hands_on_todo_list_provider/app/modules/tasks/tasks_module.dart';
-
-
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -42,13 +40,14 @@ class _AppWidgetState extends State<AppWidget> {
       //Para evitar a verbose, construiu-se rotas para os varios modulos,'{...AuthModule().routers},'
       theme: TodoListUiConfig.theme,
       navigatorKey: TodoListNavigator.navigatorKey,
-      // localizationsDelegates: [
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalWidgetLocalizations.delegate,
-      // ],
-      // supportedLocales: [
-      //   const Locale('pt', 'BR'),
-      // ],
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate
+      ],
+      supportedLocales: const [
+        Locale('pt', 'BR'),
+      ],
 
       routes: {
         ...AuthModule().routers,
