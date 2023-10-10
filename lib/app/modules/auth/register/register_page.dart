@@ -40,14 +40,20 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       successCallBack: (notifier, listenerInstance) {
         listenerInstance.dispose();
-        Navigator.of(context).pop();
+          // Navigator.of(context).pop();
+/*removemos este pop devido a alteração do 
+_firebaseAuth.idTokenChanges().listen((user) {
+para o 
+_firebaseAuth.authStateChanges().listen((user) {
+em AuthProvider*/
+      
       },
       //Este atributo abaixo é opcional
       errorCallBack: (notifier, listenerInstance) {
         print("Deu RUIM!!!!");
       },
     );
-     // context.read<RegisterController>().addListener(
+    // context.read<RegisterController>().addListener(
     //   () {
     //     final controller = context.read<RegisterController>();
     //     var success = controller.success;
