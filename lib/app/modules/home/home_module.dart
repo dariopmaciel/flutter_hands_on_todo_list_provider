@@ -11,6 +11,7 @@ class HomeModule extends TodoListModule {
   HomeModule()
       : super(
           bindings: [
+            // duplicado de task_module.dart pois não acha o task service, pois é irmão e não filho
              Provider<TasksRepository>(
               create: (context) => TasksRepositoryImpl(
                 sqliteConnectionFactory: context.read(),
@@ -21,7 +22,7 @@ class HomeModule extends TodoListModule {
                   TasksServiceImpl(tasksRepository: context.read()),
             ),
             ChangeNotifierProvider(
-              //dá problema pque o HomeModule não acha o taskCervice
+              //dá problema pque o HomeModule não acha o taskService
               //create: (context) => HomeController(tasksService: context.read()),
               create: (context) => HomeController(tasksService: context.read()),
             ),

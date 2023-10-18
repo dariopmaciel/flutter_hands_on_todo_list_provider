@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     // Navigator.of(context).pushNamed('/task/create');
     //
     Navigator.of(context).push(PageRouteBuilder(
-      transitionDuration: Duration(milliseconds: 400),
+      transitionDuration: const Duration(milliseconds: 400),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         animation =
             CurvedAnimation(parent: animation, curve: Curves.easeInQuad);
