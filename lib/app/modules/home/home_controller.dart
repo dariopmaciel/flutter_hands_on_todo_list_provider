@@ -14,6 +14,10 @@ class HomeController extends DefaultChangeNotifier {
 
   List<TaskModel> allTasks = [];
   List<TaskModel> filteredTasks = [];
+  //Variavel criada para que inicie em data específica
+  DateTime? initialDateOfWeek;
+  DateTime? selectedDay;
+
 
   HomeController({
     required TasksService tasksService,
@@ -62,12 +66,20 @@ class HomeController extends DefaultChangeNotifier {
         break;
       case TaskFilterEnum.week:
         final weekModel = await _tasksService.getWeek();
+        //faz com que o primiro dia da semana seja o que for definido em 'initialDateOfWeek' que deve ser formatado e acertado em home_week_filter
+        initialDateOfWeek = weekModel.startDate;
         tasks = weekModel.tasks;
         break;
       // default:
     }
     filteredTasks = tasks;
     allTasks = tasks;
+    if (filter == TaskFilterEnum.week) {
+      if (initialDateOfWeek != null) {
+        //Metodo que ira selecionar o dia setado
+        filterByday(initialDateOfWeek!);
+      }
+    }
     hideLoading();
     notifyListeners();
   }
@@ -76,5 +88,15 @@ class HomeController extends DefaultChangeNotifier {
     await findTasks(filter: filterSelected);
     await loadTotalTasks();
     notifyListeners();
+  }
+
+  void filterByday(DateTime date)async{
+    selectedDay = date;
+    filteredTasks = allTasks.where((task) {
+     return task.dateTime == date; //ou 'selectedDay' pois ambos são iguais;
+    }).toList();
+    notifyListeners();
+    
+
   }
 }

@@ -71,7 +71,7 @@ class _TaskCreatePageState extends State<TaskCreatePage> {
           }
         },
         label: const Text(
-          'Salvar Task',
+          'Salvar',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,

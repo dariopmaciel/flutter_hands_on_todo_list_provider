@@ -104,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       HomeHeader(),
                       HomeFilters(),
+                      //'TasksServiceImpl' controla o dia da semana q irá iniciar
                       HomeWeekFilter(),
                       HomeTasks(),
                     ],
