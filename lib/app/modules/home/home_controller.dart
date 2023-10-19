@@ -18,7 +18,6 @@ class HomeController extends DefaultChangeNotifier {
   DateTime? initialDateOfWeek;
   DateTime? selectedDay;
 
-
   HomeController({
     required TasksService tasksService,
   }) : _tasksService = tasksService;
@@ -75,10 +74,17 @@ class HomeController extends DefaultChangeNotifier {
     filteredTasks = tasks;
     allTasks = tasks;
     if (filter == TaskFilterEnum.week) {
+      if (selectedDay != null) {
+        filterByday(selectedDay!);
+      } else {
+        filterByday(initialDateOfWeek!);
+      }
       if (initialDateOfWeek != null) {
         //Metodo que ira selecionar o dia setado
         filterByday(initialDateOfWeek!);
       }
+    } else {
+      selectedDay = null;
     }
     hideLoading();
     notifyListeners();
@@ -90,13 +96,11 @@ class HomeController extends DefaultChangeNotifier {
     notifyListeners();
   }
 
-  void filterByday(DateTime date)async{
+  void filterByday(DateTime date) async {
     selectedDay = date;
     filteredTasks = allTasks.where((task) {
-     return task.dateTime == date; //ou 'selectedDay' pois ambos são iguais;
+      return task.dateTime == date; //ou 'selectedDay' pois ambos são iguais;
     }).toList();
     notifyListeners();
-    
-
   }
 }
