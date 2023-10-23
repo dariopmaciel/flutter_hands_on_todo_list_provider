@@ -43,7 +43,8 @@ class TasksRepositoryImpl implements TasksRepository {
   Future<void> checkOrUncheckTask(TaskModel task) async {
     final conn = await _sqliteConnectionFactory.openConnection();
     final finished = task.finished ? 1 : 0;
+
     await conn.rawUpdate(
-        'update todo set finalizado = ? where id=?', [finished, task.id]);
+        'update todo set finalizado = ? where id = ?', [finished, task.id]);
   }
 }

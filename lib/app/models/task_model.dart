@@ -19,4 +19,21 @@ class TaskModel {
       finished: task['finalizado'] == 1,
     );
   }
+
+@override
+List<Object?> get props => [id, description, dateTime, finished];
+
+  TaskModel copyWith({
+    int? id,
+    String? description,
+    DateTime? dateTime,
+    bool? finished,
+  }) {
+    return TaskModel(
+      id: id ?? this.id,
+      description: description ?? this.description,
+      dateTime: dateTime ?? this.dateTime,
+      finished: finished ?? this.finished,
+    );
+  }
 }

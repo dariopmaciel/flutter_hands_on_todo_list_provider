@@ -90,17 +90,26 @@ class HomeController extends DefaultChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> refreshPage() async {
-    await findTasks(filter: filterSelected);
-    await loadTotalTasks();
-    notifyListeners();
-  }
-
   void filterByday(DateTime date) async {
     selectedDay = date;
     filteredTasks = allTasks.where((task) {
       return task.dateTime == date; //ou 'selectedDay' pois ambos são iguais;
     }).toList();
     notifyListeners();
+  }
+
+  Future<void> refreshPage() async {
+    await findTasks(filter: filterSelected);
+    await loadTotalTasks();
+    notifyListeners();
+  }
+
+  Future<void> checkOrUncheckTask(TaskModel task) async {
+    showLoadingAndResetState();
+    notifyListeners();
+    final taskUpdate = task.copyWith(finished: !task.finished);
+    await _tasksService.checkOrUncheckTask(taskUpdate);
+    hideLoading();
+    refreshPage();
   }
 }
