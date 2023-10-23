@@ -47,24 +47,27 @@ class HomeTasks extends StatelessWidget {
                 .select<HomeController, List<TaskModel>>(
                     (controller) => controller.filteredTasks)
                 .map(
-                  (task) => Slidable(
-                    endActionPane: ActionPane(
-                      extentRatio: 0.30,
-                      motion: const StretchMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (context) {
-                            // onDelete(task);
-                          },
-                          icon: Icons.delete,
-                          borderRadius: BorderRadius.circular(20),
-                          backgroundColor: Colors.red,
-                          foregroundColor: Colors.white,
-                          label: "Deletar",
-                        ),
-                      ],
+                  (task) => Container(
+                    margin: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                    child: Slidable(
+                      endActionPane: ActionPane(
+                        extentRatio: 0.30,
+                        motion: const StretchMotion(),
+                        children: [
+                          SlidableAction(
+                            onPressed: (context) {
+                              onDeleteTask();
+                            },
+                            icon: Icons.delete,
+                            borderRadius: BorderRadius.circular(20),
+                            backgroundColor: Colors.red,
+                            foregroundColor: Colors.white,
+                            label: "Deletar",
+                          ),
+                        ],
+                      ),
+                      child: Task(model: task),
                     ),
-                    child: Task(model: task),
                   ),
                 )
                 .toList(),
@@ -75,3 +78,5 @@ class HomeTasks extends StatelessWidget {
     );
   }
 }
+
+void onDeleteTask() {}

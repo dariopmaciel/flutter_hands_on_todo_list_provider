@@ -13,38 +13,38 @@ class Task extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsetsDirectional.symmetric(vertical: 5),
+      // margin: const EdgeInsetsDirectional.symmetric(vertical: 5),
+      margin: const EdgeInsets.fromLTRB(0, 0, 5, 0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.grey[200],
         borderRadius: BorderRadius.circular(20),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.green,
-          ),
-        ],
+        // boxShadow: const [
+        //   BoxShadow(color: Colors.green),
+        // ],
       ),
       child: IntrinsicHeight(
         child: ListTile(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            side: const BorderSide(
-              width: 1,
-            ),
+            // side: const BorderSide(
+            //   width: 1,
+            // ),
           ),
           contentPadding: const EdgeInsets.all(8),
           leading: Checkbox(
             value: model.finished,
-            onChanged: (value) => context.read<HomeController>().checkOrUncheckTask(model),
+            onChanged: (value) =>
+                context.read<HomeController>().checkOrUncheckTask(model),
           ),
           title: Text(
             model.description,
-            style:
-                TextStyle(decoration: model.finished ? TextDecoration.lineThrough : null),
+            style: TextStyle(
+                decoration: model.finished ? TextDecoration.lineThrough : null),
           ),
           subtitle: Text(
             dateFormat.format(model.dateTime),
-            style:
-                TextStyle(decoration: model.finished ? TextDecoration.lineThrough : null),
+            style: TextStyle(
+                decoration: model.finished ? TextDecoration.lineThrough : null),
           ),
         ),
       ),
