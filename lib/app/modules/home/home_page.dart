@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             itemBuilder: (_) => [
                PopupMenuItem<bool>(
                 value: true,
-                child: Text("Mostrar Tarefas Concluidas"),
+                child: Text("${widget._homeController.showFinishingTasks ? 'Esconder ': 'Mostrar'} Tarefas Concluidas"),
               ),
             ],
           )
@@ -106,11 +106,11 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HomeHeader(),
+                      const HomeHeader(),
                       HomeFilters(),
                       //'TasksServiceImpl' controla o dia da semana q irá iniciar
-                      HomeWeekFilter(),
-                      HomeTasks(),
+                      const HomeWeekFilter(),
+                      const HomeTasks(),
                     ],
                   ),
                 ),
