@@ -84,6 +84,10 @@ class HomeController extends DefaultChangeNotifier {
     } else {
       selectedDay = null;
     }
+    if (!showFinishingTasks) {
+      filteredTasks = filteredTasks.where((task) => !task.finished).toList();
+      
+    }
     hideLoading();
     notifyListeners();
   }
@@ -111,9 +115,8 @@ class HomeController extends DefaultChangeNotifier {
     refreshPage();
   }
 
-  void showOrHideFinishingTask(){
+  void showOrHideFinishingTask() {
     showFinishingTasks = !showFinishingTasks;
     refreshPage();
   }
-
 }
