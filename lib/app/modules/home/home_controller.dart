@@ -11,6 +11,7 @@ class HomeController extends DefaultChangeNotifier {
   TotalTasksModel? toDayTotalTasks;
   TotalTasksModel? tomorrowTotalTasks;
   TotalTasksModel? weekTotalTasks;
+  bool showFinishingTasks = false;
 
   List<TaskModel> allTasks = [];
   List<TaskModel> filteredTasks = [];
@@ -76,10 +77,7 @@ class HomeController extends DefaultChangeNotifier {
     if (filter == TaskFilterEnum.week) {
       if (selectedDay != null) {
         filterByday(selectedDay!);
-      } else {
-        filterByday(initialDateOfWeek!);
-      }
-      if (initialDateOfWeek != null) {
+      } else if (initialDateOfWeek != null) {
         //Metodo que ira selecionar o dia setado
         filterByday(initialDateOfWeek!);
       }
@@ -112,4 +110,10 @@ class HomeController extends DefaultChangeNotifier {
     hideLoading();
     refreshPage();
   }
+
+  void showOrHideFinishingTask(){
+    showFinishingTasks = true;
+    
+  }
+
 }
