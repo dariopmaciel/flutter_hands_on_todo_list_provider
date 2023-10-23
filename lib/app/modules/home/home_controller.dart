@@ -113,7 +113,7 @@ class HomeController extends DefaultChangeNotifier {
 
   void showOrHideFinishingTask(){
     showFinishingTasks = true;
-    
+    refreshPage();
   }
 
 }
